@@ -1,18 +1,18 @@
-def circular_array(n, m):
-    array = list(range(1, n+1))
-    path = []
+def find_circle_path(n, m):
     current_index = 0
+    circle_array = list(range(1, n + 1))
+    path = []
 
-    while len(path) < n:
-        current_element = array[current_index]
-        path.append(current_element)
-        next_index = (current_index + m) % n
+    for _ in range(n):
+        next_index = (current_index + m - 1) % n
+        path.append(circle_array[next_index])
+        del circle_array[next_index]
+        n -= 1
         current_index = next_index
 
     return path
 
-# Пример
-n = 3
-m = 2
-result = circular_array(n, m)
-print(f'Путь с интервалом длины {m} по заданному круговому массиву: {result}')
+n = int(input("Введите число n: "))
+m = int(input("Введите число m: "))
+path = find_circle_path(n, m)
+print(path)
